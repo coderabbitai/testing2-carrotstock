@@ -6,6 +6,8 @@ rabbit warrens — stock levels, reorder alerts, ordering, and tiered enterprise
 This repository is the hands-on project for the **CodeRabbit Certification** course.
 You'll fork it, open a pull request, and watch CodeRabbit review real code.
 
+> 👉 **Start here:** follow the step-by-step [**WALKTHROUGH.md**](./WALKTHROUGH.md).
+
 ## Stack
 
 - **TypeScript** core domain — `src/`
