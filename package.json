@@ -1,0 +1,16 @@
+{
+  "name": "carrotstock",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CarrotStock — a multi-tenant carrot inventory SaaS for rabbit warrens.",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "typescript": "^5.4.0"
+  }
+}

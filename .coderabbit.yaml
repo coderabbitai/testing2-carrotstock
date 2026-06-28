@@ -1,0 +1,12 @@
+# CarrotStock — CodeRabbit configuration
+# Baseline config for the CodeRabbit Certification course.
+# Learners extend this in Lesson 4 (path_instructions) and Lesson 5 (knowledge_base).
+language: en-US
+reviews:
+  profile: chill
+  request_changes_workflow: false
+  high_level_summary: true
+  poem: true
+  auto_review:
+    enabled: true
+    drafts: false

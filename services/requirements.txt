@@ -1,0 +1,1 @@
+# CarrotStock backend workers currently rely only on the Python standard library.
