@@ -69,15 +69,22 @@ for the configuration lessons. Everything runs through pull requests into `main`
    core, the React (`.tsx`) dashboard, and the Python (`.py`) workers — and that the
    severities vary, from small nits up to a serious security issue. Read a few closely.
 
-5. **Apply a committable suggestion.** Where CodeRabbit offers a code suggestion,
-   click **Commit suggestion** to commit the fix straight from the PR.
+5. **Find a committable suggestion — but don't apply it.** Many findings include a
+   ready-to-commit code change with a **Commit suggestion** button, which lets GitHub
+   commit the fix straight into the PR. Take a moment to see where it appears and how
+   it works. **Don't click it here** — committing a fix now would change the code and
+   pull you out of the review flow you're learning. Just understand that it's there for
+   one-click fixes.
 
-6. **Use a Prompt for AI Agents.** Expand the **🤖 Prompt for AI Agents** section on a
-   finding, copy it, and paste it into your coding agent (Claude Code, Cursor, etc.)
-   to fix the issue locally.
+6. **Find the "Prompt for AI Agents" — but don't run it.** Expand the
+   **🤖 Prompt for AI Agents** section on a finding. This is a ready-made prompt you
+   could copy and hand to a coding agent (Claude Code, Cursor, etc.) to fix the issue
+   locally. Note where it lives and how you'd copy it. You don't need to actually run
+   it here — the goal is just to understand what it's for.
 
-> ✅ **Checkpoint:** you received a review, applied a committable suggestion, and used
-> a Prompt for AI Agents. **Leave this PR open** — you'll use it in Lesson 3.
+> ✅ **Checkpoint:** you received a review, read the walkthrough and the inline comments,
+> and you know where committable suggestions and the **Prompt for AI Agents** live and
+> what each is for. **Leave this PR open** — you'll use it in Lesson 3.
 
 ---
 
