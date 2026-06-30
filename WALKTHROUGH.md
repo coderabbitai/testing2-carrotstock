@@ -95,26 +95,30 @@ team's head and can't be inferred from the code — and watch it apply to every 
 review.
 
 Some findings *look* like problems but are actually fine, given context that isn't
-anywhere in the codebase. CarrotStock has one: the nightly reorder job in
-`services/reorder_report.py` wraps its per-product work in a broad `except` that skips
-errors. CodeRabbit flags that as silently dropping products from the report — a fair
-call from the code alone. But it's a **deliberate operational choice**: the batch must
-never abort on one bad record, and the rationale (newly-onboarded SKUs don't have
-thresholds yet; a separate backfill job handles them) lives in your team's head, not in
-the code.
+anywhere in the codebase. CarrotStock has one: when an order is placed, `createOrder`
+reserves stock, but `validateOrder` checks the requested quantity against on-hand
+`stock` rather than *available* stock (on-hand minus reserved). CodeRabbit flags this as
+overselling — already-reserved units counted as sellable. From the code alone that's a
+fair call. But it's a **deliberate design choice**: in CarrotStock, reservations are
+soft holds that frequently expire (abandoned carts), so the team validates against
+on-hand on purpose — rejecting orders for stock tied up in carts would hurt conversion —
+and the authoritative hard-allocation check runs in a downstream fulfillment service.
+That rationale lives in your team's head, not in the code.
 
 ### Steps
 
-1. On your Lesson 2 PR, **find the comment** on `services/reorder_report.py` about the
-   broad `except` *silently dropping products from the reorder report*.
+1. On your Lesson 2 PR, **find the comment** on `src/orders.ts` (around line 15):
+   *"Validate against available stock, not raw on-hand stock."*
 
 2. **Reply to that comment**, addressed to `@coderabbitai`, with your team's context.
    Paste this:
 
-   > @coderabbitai The nightly reorder job intentionally catches and skips per-product
-   > errors so one malformed record can't abort the whole batch. Missing thresholds are
-   > expected for newly-onboarded SKUs and get backfilled by a separate job — this broad
-   > catch is deliberate operational resilience, so please don't flag it.
+   > @coderabbitai Validating against on-hand stock here is intentional. In CarrotStock,
+   > reservations are soft holds that frequently expire (abandoned carts), so we
+   > deliberately don't subtract reserved units at order-validation time — rejecting
+   > orders for stock tied up in carts would hurt conversion. The authoritative
+   > hard-allocation check runs in our downstream fulfillment service at pick time.
+   > Please don't flag this as overselling.
 
 3. **Wait for the `Learnings added` confirmation** from CodeRabbit.
 
@@ -124,9 +128,9 @@ the code.
    @coderabbitai full review
    ```
 
-5. **Observe the delta:** the new review **no longer flags the broad `except`** in
-   `services/reorder_report.py`, because the learning now carries the context that makes
-   it an intentional decision.
+5. **Observe the delta:** the new review **no longer flags the on-hand stock check** in
+   `src/orders.ts` as overselling, because the learning now carries the context that
+   makes it an intentional decision.
 
 6. *(Optional)* Confirm the learning was saved at
    [app.coderabbit.ai/learnings](https://app.coderabbit.ai/learnings).
