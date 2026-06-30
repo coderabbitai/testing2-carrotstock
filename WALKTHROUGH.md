@@ -220,6 +220,22 @@ won't enforce that on its own — until you wire the file in as a knowledge base
    missed — the one spot in `src/orders.ts` that throws a bare `Error` instead of the
    project's typed `AppError`.
 
+4. **(Optional) Ask CodeRabbit to recap what your configuration surfaced.** If you'd
+   like to see, in one place, exactly which findings your path instruction and knowledge
+   base produced, post this comment on the PR:
+
+   ```text
+   @coderabbitai Now that this PR was reviewed with our `path_instructions` and the
+   `CodeRabbit.md` knowledge base in place, can you summarize the findings those two
+   settings produced? Please group them under **Path instructions** and **Knowledge
+   base**, and for each finding give the file and line plus a one-line description. Skip
+   anything you would have flagged without this configuration.
+   ```
+
+   CodeRabbit replies with a grouped summary, making the impact of your configuration
+   explicit. *(This is a free-form chat answer, so treat the grouping as a best-effort
+   summary rather than a guaranteed exhaustive list.)*
+
 > ⚠️ **Gotcha worth knowing:** register guideline files under
 > `knowledge_base.code_guidelines.filePatterns`, **not** `path_instructions`. Putting the
 > filename in `path_instructions` tells CodeRabbit to *review that file as code* rather
