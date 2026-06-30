@@ -9,4 +9,7 @@ reviews:
   poem: true
   auto_review:
     enabled: true
+    # Review PRs against any base branch, not just the default branch.
+    base_branches:
+      - ".*"
     drafts: false
