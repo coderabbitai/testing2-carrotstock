@@ -95,24 +95,26 @@ team's head and can't be inferred from the code — and watch it apply to every 
 review.
 
 Some findings *look* like problems but are actually fine, given context that isn't
-anywhere in the codebase. CarrotStock has one: a **hardcoded legacy enterprise
-discount** in `src/pricing.ts` (and echoed in `services/pricing_sync.py`). CodeRabbit
-will flag that magic number as something to extract or remove — but it's deliberate and
-load-bearing.
+anywhere in the codebase. CarrotStock has one: the nightly reorder job in
+`services/reorder_report.py` wraps its per-product work in a broad `except` that skips
+errors. CodeRabbit flags that as silently dropping products from the report — a fair
+call from the code alone. But it's a **deliberate operational choice**: the batch must
+never abort on one bad record, and the rationale (newly-onboarded SKUs don't have
+thresholds yet; a separate backfill job handles them) lives in your team's head, not in
+the code.
 
 ### Steps
 
-1. On your Lesson 2 PR, **find the comment** about the legacy enterprise discount
-   constant in `src/pricing.ts`.
+1. On your Lesson 2 PR, **find the comment** on `services/reorder_report.py` about the
+   broad `except` *silently dropping products from the reorder report*.
 
 2. **Reply to that comment**, addressed to `@coderabbitai`, with your team's context.
    Paste this:
 
-   > @coderabbitai We intentionally keep the legacy enterprise discount (the hardcoded
-   > `0.17` rate for grandfathered enterprise tenants) exactly as it is. It's
-   > load-bearing: a downstream billing system reconciles invoices against this precise
-   > value, so changing or removing it would break reconciliation. Please don't flag it
-   > as a magic number, dead code, or suggest refactoring or removing it.
+   > @coderabbitai The nightly reorder job intentionally catches and skips per-product
+   > errors so one malformed record can't abort the whole batch. Missing thresholds are
+   > expected for newly-onboarded SKUs and get backfilled by a separate job — this broad
+   > catch is deliberate operational resilience, so please don't flag it.
 
 3. **Wait for the `Learnings added` confirmation** from CodeRabbit.
 
@@ -122,9 +124,9 @@ load-bearing.
    @coderabbitai full review
    ```
 
-5. **Observe the delta:** the new review **no longer flags the legacy discount** — and
-   the flag drops in **both** `src/pricing.ts` *and* `services/pricing_sync.py`, because
-   one learning applies everywhere that pattern appears.
+5. **Observe the delta:** the new review **no longer flags the broad `except`** in
+   `services/reorder_report.py`, because the learning now carries the context that makes
+   it an intentional decision.
 
 6. *(Optional)* Confirm the learning was saved at
    [app.coderabbit.ai/learnings](https://app.coderabbit.ai/learnings).
