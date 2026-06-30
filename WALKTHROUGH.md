@@ -17,9 +17,16 @@ attributable to the *one* configuration item you just added — that's the whole
 
 This guide assumes you've finished **Lesson 1 (Setup)**:
 
-- ✅ You've **forked** this repository into your own GitHub account.
+- ✅ You've **forked** this repository into your own GitHub account — with **all
+  branches**, not just `main` (see the warning below).
 - ✅ You've **installed the CodeRabbit GitHub App** on your fork and it's watching the repo.
 - ✅ You're signed in at [app.coderabbit.ai](https://app.coderabbit.ai).
+
+> ⚠️ **Fork all branches, not just `main`.** GitHub's fork dialog checks
+> **"Copy the `DEFAULT` branch only"** by default — **uncheck it** so `branch-a` and
+> `branch-b` come along. Without them, the pull-request steps below have nothing to
+> compare. Already forked with only `main`? Delete the fork and re-fork with that box
+> unchecked.
 
 > Haven't done that yet? Complete Lesson 1 first, then come back here.
 
