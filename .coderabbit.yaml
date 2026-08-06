@@ -1,15 +1,15 @@
-# CarrotStock — CodeRabbit configuration
-# Baseline config for the CodeRabbit Certification course.
-# Learners extend this in Lesson 4 (path_instructions) and Lesson 5 (knowledge_base).
-language: en-US
+# .coderabbit.yaml
 reviews:
-  profile: chill
-  request_changes_workflow: false
-  high_level_summary: true
-  poem: true
-  auto_review:
-    enabled: true
-    # Review PRs against any base branch, not just the default branch.
-    base_branches:
-      - ".*"
-    drafts: false
+auto_review:
+enabled: true
+drafts: false
+path_instructions:
+← New section under reviews:
+- path: "**/*.ts"
+← Glob — matches all TypeScript files
+instructions: >
+← Plain-English directive — any sentence(s)
+Flag any use of the `any` type; require a specific type or
+`unknown` with narrowing. Require explicit return type annotations
+on all exported functions. Flag non-null assertions (the `!`
+operator) and require explicit null handling instead.
