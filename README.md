@@ -1,4 +1,4 @@
-# 🥕 CarrotStock
+amsh# 🥕 CarrotStock
 
 CarrotStock is a (fictional) multi-tenant SaaS for managing carrot inventory across
 rabbit warrens — stock levels, reorder alerts, ordering, and tiered enterprise pricing.
